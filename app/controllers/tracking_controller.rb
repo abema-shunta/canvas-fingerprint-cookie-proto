@@ -8,8 +8,6 @@ class TrackingController < ApplicationController
 
   Mime::Type.register "image/png", :png
   def uid
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "*"
     expires_in 48.hour
     respond_to do |format|
       format.html { }
