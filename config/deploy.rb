@@ -12,7 +12,6 @@ set :deploy_to, "/home/rails"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
@@ -47,18 +46,10 @@ namespace :deploy do
     end
   end
 
-  desc "Initial Deploy"
+  desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
-      before 'deploy:restart', 'puma:start'
       invoke 'deploy'
-    end
-  end
-
-  desc "Restart Application"
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
     end
   end
 
