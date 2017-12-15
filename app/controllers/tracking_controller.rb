@@ -3,12 +3,14 @@ require 'chunky_png'
 class TrackingController < ApplicationController
 
   def index
-    expires_in 1.hour
+    expires_in 48.hour
   end
 
   Mime::Type.register "image/png", :png
   def uid
-    expires_in 1.hour
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "*"
+    expires_in 48.hour
     respond_to do |format|
       format.html { }
       format.png {

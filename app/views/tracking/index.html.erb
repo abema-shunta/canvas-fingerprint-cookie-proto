@@ -1,3 +1,30 @@
 <h1> Welcome </h1>
 
 <img src="/tracking/uid.png" width="100" height="100" />
+
+<img src="http://shuntd-uk.work/tracking/uid.png" width="100" height="100" id="uid"/>
+
+<canvas id="cl" width="2" height="2" />
+
+
+<script>
+
+
+
+window.onload = function() {
+    console.log("test");
+
+    var c=document.getElementById("cl");
+    var ctx=c.getContext("2d");
+    var img=document.getElementById("uid");
+    img.crossOrigin = 'anonymous';
+    ctx.drawImage(img,0,0);
+
+    var uid = [0,1,2,3].map(function(e){
+      return ctx.getImageData(e%2, parseInt(e/2)%2, 1, 1).data.map(function(ie){return ie.toString(16)}).join("")
+    }).join("");
+    console.log(uid)
+    console.log([0,1,2,3].map(function(e){return e}).join(""));
+};
+
+</script>
