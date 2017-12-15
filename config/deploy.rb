@@ -8,7 +8,7 @@ set :repo_url, "git@github.com:shuntd-uk/canvas-fingerprint-cookie-proto.git"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "~"
+set :deploy_to, "/home/rails"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -47,10 +47,18 @@ namespace :deploy do
     end
   end
 
-  desc 'Initial Deploy'
+  desc "Initial Deploy"
   task :initial do
     on roles(:app) do
+      before 'deploy:restart', 'puma:start'
       invoke 'deploy'
+    end
+  end
+
+  desc "Restart Application"
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
     end
   end
 
