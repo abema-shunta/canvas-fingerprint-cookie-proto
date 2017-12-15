@@ -8,6 +8,7 @@ class TrackingController < ApplicationController
 
   Mime::Type.register "image/png", :png
   def uid
+    expires_in 1.hour
     respond_to do |format|
       format.html { }
       format.png {
