@@ -3,7 +3,6 @@ require 'chunky_png'
 class TrackingController < ApplicationController
 
   def index
-    expires_in 48.hour
   end
 
   Mime::Type.register "image/png", :png
